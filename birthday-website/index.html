@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="A premium cinematic interactive birthday experience — countdown, memories, wishes and celebration." />
+<meta name="theme-color" content="#080614" />
+<meta property="og:title" content="It's My Birthday!" />
+<meta property="og:description" content="Another chapter begins... Step into a cinematic birthday experience." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+<link rel="alternate icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%8E%82%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Sora:wght@300;400;500;600;700&display=swap" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#home">Skip to content</a>
+
+<!-- ══════════════════ LOADER ══════════════════ -->
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div class="loader-inner">
+    <div class="loader-cake" aria-hidden="true">
+      <span class="loader-candle"><i class="loader-flame"></i></span>
+      <span class="loader-candle"><i class="loader-flame"></i></span>
+      <span class="loader-candle"><i class="loader-flame"></i></span>
+    </div>
+    <p class="loader-text">Lighting the candles<span class="dots"><i>.</i><i>.</i><i>.</i></span></p>
+    <div class="loader-bar"><span></span></div>
+  </div>
+</div>
+
+<!-- ══════════════════ BACKGROUNDS ══════════════════ -->
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+</div>
+<canvas id="particles" class="particles-canvas" aria-hidden="true"></canvas>
+<canvas id="fx" class="fx-canvas" aria-hidden="true"></canvas>
+
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="brand" data-scroll>
+      <span class="brand-mark" aria-hidden="true">🎂</span>
+      <span class="brand-text">
+        <strong data-config="firstName">My</strong>
+        <em>Birthday</em>
+      </span>
+    </a>
+
+    <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="#home"     class="nav-link is-active" data-scroll>Home</a></li>
+        <li><a href="#journey"  class="nav-link" data-scroll>Journey</a></li>
+        <li><a href="#memories" class="nav-link" data-scroll>Memories</a></li>
+        <li><a href="#thoughts" class="nav-link" data-scroll>Thoughts</a></li>
+        <li><a href="#goals"    class="nav-link" data-scroll>Goals</a></li>
+        <li><a href="#wishes"   class="nav-link" data-scroll>Wishes</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Toggle theme">
+          <span class="icon-sun" aria-hidden="true">☀️</span>
+          <span class="icon-moon" aria-hidden="true">🌙</span>
+        </button>
+        <button class="icon-btn nav-music" id="navMusic" type="button" aria-pressed="false" aria-label="Play birthday music" title="Play birthday music">
+          <span class="icon-play" aria-hidden="true">🎶</span>
+        </button>
+      </div>
+    </nav>
+
+    <button class="hamburger" id="hamburger" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+  <!-- ══════════════════ 1 · HERO ══════════════════ -->
+  <section id="home" class="section hero" aria-labelledby="heroTitle">
+    <div class="hero-deco" aria-hidden="true">
+      <span class="balloon balloon-1"></span>
+      <span class="balloon balloon-2"></span>
+      <span class="balloon balloon-3"></span>
+      <span class="balloon balloon-4"></span>
+      <span class="sparkle sparkle-1">✦</span>
+      <span class="sparkle sparkle-2">✧</span>
+      <span class="sparkle sparkle-3">✦</span>
+      <span class="sparkle sparkle-4">✧</span>
+      <span class="sparkle sparkle-5">✦</span>
+    </div>
+
+    <div class="container hero-inner">
+      <div class="hero-copy" data-parallax="0.04">
+        <p class="eyebrow" data-reveal>
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span data-config="birthdayLong">My Special Day</span>
+        </p>
+
+        <h1 class="hero-title" id="heroTitle" data-reveal>
+          <span class="line-1" data-config="heroTitle">It's My Birthday!</span>
+          <span class="line-2" data-config="heroSubtitle">Another Chapter Begins&hellip;</span>
+        </h1>
+
+        <p class="hero-text" data-reveal data-config="heroMessage">
+          Today isn't just another day.<br />
+          It's the beginning of another beautiful chapter of my life.
+        </p>
+
+        <div class="countdown-wrap" data-reveal>
+          <p class="countdown-caption" id="countdownCaption">Counting down to the big day</p>
+          <div class="countdown" id="countdown" role="timer" aria-label="Time remaining until the birthday">
+            <div class="cd-unit">
+              <div class="cd-card"><span class="cd-value" data-unit="days">00</span></div>
+              <span class="cd-label">Days</span>
+            </div>
+            <span class="cd-sep" aria-hidden="true">:</span>
+            <div class="cd-unit">
+              <div class="cd-card"><span class="cd-value" data-unit="hours">00</span></div>
+              <span class="cd-label">Hours</span>
+            </div>
+            <span class="cd-sep" aria-hidden="true">:</span>
+            <div class="cd-unit">
+              <div class="cd-card"><span class="cd-value" data-unit="minutes">00</span></div>
+              <span class="cd-label">Minutes</span>
+            </div>
+            <span class="cd-sep" aria-hidden="true">:</span>
+            <div class="cd-unit">
+              <div class="cd-card"><span class="cd-value" data-unit="seconds">00</span></div>
+              <span class="cd-label">Seconds</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-cta" data-reveal>
+          <a href="#surprise" class="btn btn-primary" data-scroll>
+            <span>🎁 Start the Celebration</span>
+            <i class="btn-glow" aria-hidden="true"></i>
+          </a>
+          <a href="#wishes" class="btn btn-ghost" data-scroll>💌 Make A Wish For Me</a>
+        </div>
+      </div>
+
+      <div class="hero-art" data-parallax="0.08">
+        <div class="cake-stage">
+          <div class="cake-halo" aria-hidden="true"></div>
+          <svg class="cake" viewBox="0 0 340 320" role="img" aria-label="An animated birthday cake with three glowing candles">
+            <defs>
+              <linearGradient id="layerA" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f7b7d6"/><stop offset="100%" stop-color="#c86ba8"/>
+              </linearGradient>
+              <linearGradient id="layerB" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#cbb4ff"/><stop offset="100%" stop-color="#7f5af0"/>
+              </linearGradient>
+              <linearGradient id="layerC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffe6a7"/><stop offset="100%" stop-color="#f0b357"/>
+              </linearGradient>
+              <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity=".55"/>
+                <stop offset="100%" stop-color="#a48bff" stop-opacity=".25"/>
+              </linearGradient>
+              <radialGradient id="flameG" cx="50%" cy="65%" r="60%">
+                <stop offset="0%" stop-color="#fffbe8"/><stop offset="45%" stop-color="#ffd66b"/>
+                <stop offset="100%" stop-color="#ff7a2f" stop-opacity=".85"/>
+              </radialGradient>
+              <radialGradient id="haloG" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffcf6b" stop-opacity=".55"/>
+                <stop offset="60%" stop-color="#a86bff" stop-opacity=".18"/>
+                <stop offset="100%" stop-color="#a86bff" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="7" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <ellipse class="cake-plate" cx="170" cy="286" rx="132" ry="20" fill="url(#plateG)"/>
+            <ellipse class="cake-shadow" cx="170" cy="292" rx="112" ry="14"/>
+
+            <g class="cake-layers">
+              <!-- bottom layer -->
+              <rect x="64" y="212" width="212" height="62" rx="16" fill="url(#layerA)"/>
+              <path class="drip" d="M64 214 q14 20 28 0 q14 20 28 0 q14 20 28 0 q14 20 28 0 q14 20 28 0 q14 20 28 0 q14 20 28 0 v10 h-212 z" fill="#ffe9f4" opacity=".9"/>
+              <!-- middle layer -->
+              <rect x="88" y="158" width="164" height="56" rx="14" fill="url(#layerB)"/>
+              <path class="drip" d="M88 160 q14 18 28 0 q14 18 28 0 q14 18 28 0 q14 18 28 0 q14 18 28 0 v10 h-164 z" fill="#efe7ff" opacity=".85"/>
+              <!-- top layer -->
+              <rect x="110" y="110" width="120" height="50" rx="13" fill="url(#layerC)"/>
+              <path class="drip" d="M110 112 q12 17 24 0 q12 17 24 0 q12 17 24 0 q12 17 24 0 q12 17 24 0 v9 h-120 z" fill="#fff6dd" opacity=".9"/>
+              <circle cx="170" cy="104" r="10" fill="#ff5f8f"/>
+            </g>
+
+            <g class="cake-candles" filter="url(#softGlow)">
+              <g class="candle" style="--d:0s">
+                <rect x="140" y="64" width="10" height="48" rx="5" fill="#ffd9e8"/>
+                <path d="M140 70 h10 M140 82 h10 M140 94 h10" stroke="#ff8fb6" stroke-width="3" stroke-linecap="round"/>
+                <g class="flame"><path class="flame-outer" d="M145 62c-9-8-11-15-6-21 1 5 4 7 6 9 3-3 4-7 4-10 6 6 5 15-4 22z"/><path class="flame-core" d="M145 62c-4-4-5-7-2-10 1 2 3 4 4 5 2-2 2-4 2-5 3 3 2 8-4 10z"/></g>
+              </g>
+              <g class="candle" style="--d:.35s">
+                <rect x="165" y="54" width="10" height="58" rx="5" fill="#d9e2ff"/>
+                <path d="M165 62 h10 M165 76 h10 M165 90 h10" stroke="#8fa6ff" stroke-width="3" stroke-linecap="round"/>
+                <g class="flame"><path class="flame-outer" d="M170 52c-10-9-12-17-6-23 1 5 4 8 6 10 3-3 5-8 5-11 7 7 5 17-5 24z"/><path class="flame-core" d="M170 52c-4-4-6-8-3-11 1 3 3 5 4 6 2-2 3-5 3-6 3 4 2 9-4 11z"/></g>
+              </g>
+              <g class="candle" style="--d:.7s">
+                <rect x="190" y="64" width="10" height="48" rx="5" fill="#ffe9c9"/>
+                <path d="M190 72 h10 M190 84 h10 M190 96 h10" stroke="#ffb765" stroke-width="3" stroke-linecap="round"/>
+                <g class="flame"><path class="flame-outer" d="M195 62c-9-8-11-15-6-21 1 5 4 7 6 9 3-3 4-7 4-10 6 6 5 15-4 22z"/><path class="flame-core" d="M195 62c-4-4-5-7-2-10 1 2 3 4 4 5 2-2 2-4 2-5 3 3 2 8-4 10z"/></g>
+              </g>
+            </g>
+
+            <g class="cake-sparks" aria-hidden="true">
+              <circle cx="118" cy="60" r="2.4"/><circle cx="222" cy="46" r="2"/><circle cx="238" cy="96" r="1.8"/>
+              <circle cx="96" cy="104" r="2.2"/><circle cx="200" cy="30" r="1.6"/><circle cx="140" cy="28" r="2"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <a href="#surprise" class="scroll-indicator" data-scroll aria-label="Scroll to the next section">
+      <span class="mouse" aria-hidden="true"><i></i></span>
+      <span class="scroll-text">Scroll</span>
+    </a>
+  </section>
+
+  <!-- ══════════════════ 2 · SURPRISE ══════════════════ -->
+  <section id="surprise" class="section section-surprise" aria-labelledby="surpriseTitle">
+    <div class="container center">
+      <p class="section-eyebrow" data-reveal>🎁 Something special</p>
+      <h2 class="section-title" id="surpriseTitle" data-reveal>A Surprise For You</h2>
+      <p class="section-sub" data-reveal>Tap the gift to unwrap it.</p>
+
+      <div class="gift-stage" data-reveal>
+        <div class="gift-halo" aria-hidden="true"></div>
+        <button class="gift" id="gift" type="button" aria-label="Open your birthday surprise" aria-describedby="giftHint">
+          <span class="gift-lid" aria-hidden="true">
+            <span class="gift-bow"><i></i><i></i></span>
+            <span class="gift-ribbon-v"></span>
+          </span>
+          <span class="gift-box" aria-hidden="true">
+            <span class="gift-ribbon-v"></span>
+            <span class="gift-ribbon-h"></span>
+          </span>
+          <span class="gift-shine" aria-hidden="true"></span>
+        </button>
+        <p class="gift-hint" id="giftHint">Click to open ✨</p>
+      </div>
+
+      <div class="surprise-message" id="surpriseMessage" hidden>
+        <div class="glass-card surprise-card">
+          <span class="surprise-quote" aria-hidden="true">“</span>
+          <p class="surprise-text" data-config="surpriseMessage">Thank you for being part of my journey ❤️</p>
+          <span class="surprise-sign" data-config="name">— Me</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 3 · JOURNEY ══════════════════ -->
+  <section id="journey" class="section section-journey" aria-labelledby="journeyTitle">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow" data-reveal>📖 The story so far</p>
+        <h2 class="section-title" id="journeyTitle" data-reveal>A Journey Through The Years</h2>
+        <p class="section-sub" data-reveal>Every chapter shaped the person I am today.</p>
+      </div>
+      <ol class="timeline" id="timeline" aria-label="Life journey timeline"></ol>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 4 · MEMORIES ══════════════════ -->
+  <section id="memories" class="section section-memories" aria-labelledby="memoriesTitle">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow" data-reveal>📸 The gallery</p>
+        <h2 class="section-title" id="memoriesTitle" data-reveal>Moments Worth Remembering</h2>
+        <p class="section-sub" data-reveal>Tap any moment to open it fullscreen.</p>
+      </div>
+      <div class="gallery" id="gallery" aria-label="Photo memories gallery"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 5 · THOUGHTS ══════════════════ -->
+  <section id="thoughts" class="section section-thoughts" aria-labelledby="thoughtsTitle">
+    <div class="thoughts-particles" id="thoughtsParticles" aria-hidden="true"></div>
+    <div class="container center">
+      <p class="section-eyebrow" data-reveal>💭 A quiet moment</p>
+      <h2 class="section-title" id="thoughtsTitle" data-reveal>A Few Words From Me</h2>
+
+      <div class="glass-card thoughts-card" data-reveal>
+        <span class="quote-mark" aria-hidden="true">“</span>
+        <p class="typing" id="typing" aria-live="polite"></p>
+        <p class="thoughts-final" id="thoughtsFinal" hidden>This year, I choose growth. 🚀</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 6 · GOALS ══════════════════ -->
+  <section id="goals" class="section section-goals" aria-labelledby="goalsTitle">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow" data-reveal>🎯 The road ahead</p>
+        <h2 class="section-title" id="goalsTitle" data-reveal>My Goals For This New Chapter</h2>
+        <p class="section-sub" data-reveal>Intentions I'm carrying into this new year of life.</p>
+      </div>
+      <div class="goals-grid" id="goalsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 7 · WISHES ══════════════════ -->
+  <section id="wishes" class="section section-wishes" aria-labelledby="wishesTitle">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-eyebrow" data-reveal>🥂 Leave a note</p>
+        <h2 class="section-title" id="wishesTitle" data-reveal>Make A Wish For Me 🎂</h2>
+        <p class="section-sub" data-reveal>Your words are saved on this device and will be here when you return.</p>
+      </div>
+
+      <div class="wishes-layout">
+        <form class="glass-card wish-form" id="wishForm" novalidate data-reveal>
+          <div class="field">
+            <label for="wishName">Your Name</label>
+            <input type="text" id="wishName" name="name" maxlength="40" autocomplete="name" placeholder="e.g. Sarah" required aria-describedby="nameError" />
+            <small class="error" id="nameError" role="alert"></small>
+          </div>
+          <div class="field">
+            <label for="wishText">Birthday Wish</label>
+            <textarea id="wishText" name="wish" rows="4" maxlength="240" placeholder="Write something kind, funny or wish me luck…" required aria-describedby="wishError wishCount"></textarea>
+            <div class="field-meta">
+              <small class="error" id="wishError" role="alert"></small>
+              <small class="counter" id="wishCount" aria-live="polite">0 / 240</small>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">
+            <span>Send Birthday Wish 💌</span>
+            <i class="btn-glow" aria-hidden="true"></i>
+          </button>
+          <p class="form-success" id="formSuccess" role="status" hidden></p>
+        </form>
+
+        <div class="wish-wall-wrap" data-reveal>
+          <div class="wall-head">
+            <h3>Birthday Wish Wall</h3>
+            <span class="wall-count" id="wallCount">0 wishes</span>
+          </div>
+          <div class="wish-wall" id="wishWall" aria-live="polite"></div>
+          <p class="wall-empty" id="wallEmpty">No wishes yet — be the first to leave one. 💌</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 8 · CELEBRATE ══════════════════ -->
+  <section id="celebrate" class="section section-celebrate" aria-labelledby="celebrateTitle">
+    <div class="container center">
+      <p class="section-eyebrow" data-reveal>🎊 The best part</p>
+      <h2 class="section-title" id="celebrateTitle" data-reveal>Ready to make some noise?</h2>
+      <p class="section-sub" data-reveal>One button. Confetti, fireworks, balloons — the whole show.</p>
+
+      <button class="celebrate-btn" id="celebrateBtn" type="button" data-reveal>
+        <span class="celebrate-label">🎉 CELEBRATE!</span>
+        <span class="celebrate-ring" aria-hidden="true"></span>
+        <span class="celebrate-ring delay" aria-hidden="true"></span>
+      </button>
+      <p class="celebrate-note">Heads up: it's a full-screen moment. 🎆</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 9 · FINALE ══════════════════ -->
+  <section id="finale" class="section section-finale" aria-labelledby="finaleTitle">
+    <div class="container center">
+      <img class="finale-avatar" id="finaleAvatar" src="" alt="" width="120" height="120" loading="lazy" decoding="async" hidden />
+
+      <h2 class="finale-title" id="finaleTitle" data-reveal>Here's To Another Beautiful Year! 🥂</h2>
+
+      <p class="finale-text" data-reveal>
+        Thank you to everyone who has been part of my journey.<br /><br />
+        Here's to more dreams, more adventures, more memories, more learning, more growth,
+        and a lot more reasons to smile.<br /><br />
+        Cheers to the next chapter. ❤️
+      </p>
+
+      <div class="finale-banner" data-reveal>
+        <span class="finale-banner-text">🎂 HAPPY BIRTHDAY TO ME 🎉</span>
+      </div>
+
+      <div class="finale-cake" data-reveal>
+        <div class="mini-cake" aria-hidden="true">
+          <span class="mc-candle"><i></i></span>
+          <span class="mc-candle"><i></i></span>
+          <span class="mc-candle"><i></i></span>
+        </div>
+        <button class="btn btn-ghost" id="finaleFireworks" type="button">🎆 Launch Fireworks</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img class="footer-avatar" id="footerAvatar" src="" alt="" width="56" height="56" loading="lazy" decoding="async" hidden />
+      <p class="footer-name" data-config="name">Me</p>
+      <p class="footer-tag">Made with ❤️ and a little bit of confetti.</p>
+    </div>
+    <ul class="socials" id="socials" aria-label="Social links"></ul>
+    <p class="footer-copy">© <span id="year">2026</span> <span data-config="name">Me</span>. All wishes reserved.</p>
+  </div>
+</footer>
+
+<!-- ══════════════════ LIGHTBOX ══════════════════ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Memory viewer" hidden>
+  <div class="lightbox-backdrop" data-close></div>
+  <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Close image viewer">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous image">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next image">›</button>
+  <figure class="lightbox-figure">
+    <div class="lb-image-wrap">
+      <img id="lbImage" src="" alt="" />
+      <span class="lb-spinner" aria-hidden="true"></span>
+    </div>
+    <figcaption class="lightbox-caption">
+      <span id="lbCaption"></span>
+      <span class="lb-index" id="lbIndex"></span>
+    </figcaption>
+  </figure>
+</div>
+
+<!-- ══════════════════ CELEBRATION OVERLAY ══════════════════ -->
+<div class="celebration" id="celebration" aria-hidden="true">
+  <div class="celebration-glow"></div>
+  <div class="balloon-field" id="balloonField"></div>
+  <div class="celebration-content">
+    <p class="celebration-kicker">🎉🎂🎉</p>
+    <h2 class="celebration-title">LET'S CELEBRATE! 🎂🎉</h2>
+    <p class="celebration-sub" data-config="celebrationMessage">Thank you for celebrating with me.</p>
+    <button class="btn btn-ghost" id="celebrationClose" type="button">Close</button>
+  </div>
+</div>
+
+<!-- ══════════════════ FLOATING MUSIC BUTTON ══════════════════ -->
+<button class="music-fab" id="musicFab" type="button" aria-pressed="false" aria-label="Play birthday music" title="Play birthday music">
+  <span class="music-icon" aria-hidden="true">🎵</span>
+  <span class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+</button>
+
+<!-- ══════════════════ TOASTS ══════════════════ -->
+<div class="toast-stack" id="toastStack" role="status" aria-live="polite"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

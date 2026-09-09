@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7b7d6"/><stop offset="100%" stop-color="#c86ba8"/>
+    </linearGradient>
+    <linearGradient id="frost" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe6a7"/><stop offset="100%" stop-color="#f0b357"/>
+    </linearGradient>
+    <radialGradient id="flame" cx="50%" cy="65%" r="60%">
+      <stop offset="0%" stop-color="#fffbe8"/><stop offset="45%" stop-color="#ffd66b"/><stop offset="100%" stop-color="#ff7a2f"/>
+    </radialGradient>
+  </defs>
+  <rect x="6" y="34" width="52" height="22" rx="6" fill="url(#cake)"/>
+  <path d="M6 36 q7 8 13 0 q7 8 13 0 q7 8 13 0 q7 8 13 0 v4 H6 z" fill="#ffe9f4" opacity=".9"/>
+  <rect x="14" y="22" width="36" height="14" rx="5" fill="url(#frost)"/>
+  <rect x="30" y="8" width="4" height="14" rx="2" fill="#ffd9e8"/>
+  <path d="M32 8c-4-4-5-8-2-11 1 3 2 4 3 5 2-2 2-4 2-5 3 3 2 8-3 11z" fill="url(#flame)"/>
+</svg>
